@@ -2,8 +2,9 @@
 
 import cv2 as cv
 import numpy as np
+from numpy.lib.index_tricks import AxisConcatenator
 
-img = cv.imread('../Resources/Photos/park.jpg')
+img = cv.imread("..\\Resources\\Photos\\park.jpg")
 cv.imshow('Park', img)
 
 # Translation
@@ -24,18 +25,26 @@ cv.imshow('Translated', translated)
 def rotate(img, angle, rotPoint=None):
     (height,width) = img.shape[:2]
 
+    # rotate around center
     if rotPoint is None:
         rotPoint = (width//2,height//2)
     
     rotMat = cv.getRotationMatrix2D(rotPoint, angle, 1.0)
-    dimensions = (width,height)
+    dimensions = (width, height)
 
     return cv.warpAffine(img, rotMat, dimensions)
 
+# +: counter clockwise
+# -: clockwise
 rotated = rotate(img, -45)
-cv.imshow('Rotated', rotated)
+cv.imshow('Rotated Clockwise', rotated)
 
-rotated_rotated = rotate(img, -90)
+rotated = rotate(img, 90)
+cv.imshow('Rotated Counter Clockwise', rotated)
+
+# previous rotation introduced black traingles into the image
+#   so these triangles get rotated too
+rotated_rotated = rotate(rotated, 45)
 cv.imshow('Rotated Rotated', rotated_rotated)
 
 # Resizing
@@ -43,6 +52,9 @@ resized = cv.resize(img, (500,500), interpolation=cv.INTER_CUBIC)
 cv.imshow('Resized', resized)
 
 # Flipping
+#   - 0: x-axis 
+#   - 1: y-axis
+#   - -1: both axis
 flip = cv.flip(img, -1)
 cv.imshow('Flip', flip)
 

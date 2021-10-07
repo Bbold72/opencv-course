@@ -3,11 +3,11 @@
 import cv2 as cv
 import numpy as np
 
-img = cv.imread('../Resources/Photos/cats.jpg')
-cv.imshow('Cats', img)
+# boundaries of objects
+# mathematically, contours and edges are different
 
-blank = np.zeros(img.shape, dtype='uint8')
-cv.imshow('Blank', blank)
+img = cv.imread("..\\Resources\\Photos\\cats.jpg")
+cv.imshow('Cats', img)
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow('Gray', gray)
@@ -20,9 +20,16 @@ cv.imshow('Canny Edges', canny)
 
 # ret, thresh = cv.threshold(gray, 125, 255, cv.THRESH_BINARY)
 # cv.imshow('Thresh', thresh)
-
+# RETR_LIST: all countours
+# RETR_TREE: heirarchal contours
+# RETR_EXTERNAL: all external contours
+# CHAIN_APPROX_SIMPLE: return simplest set of points
 contours, hierarchies = cv.findContours(canny, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
 print(f'{len(contours)} contour(s) found!')
+
+
+blank = np.zeros(img.shape, dtype='uint8')
+cv.imshow('Blank', blank)
 
 cv.drawContours(blank, contours, -1, (0,0,255), 1)
 cv.imshow('Contours Drawn', blank)

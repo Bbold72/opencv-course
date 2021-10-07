@@ -2,14 +2,17 @@
 
 import cv2 as cv
 
-img = cv.imread('../Resources/Photos/cats.jpg')
+img = cv.imread("..\\Resources\\Photos\\cats.jpg")
 cv.imshow('Cats', img)
 
+# waits infinite amount of time for keypress
 cv.waitKey(0)
 
 # Reading Videos
-capture = cv.VideoCapture('../Resources/Videos/dog.mp4')
+capture = cv.VideoCapture("..\\Resources\\Videos\\dog.mp4")
 
+# reads in video frame by frame
+# when video finishes, will retrun -215 error because it could not read an image
 while True:
     isTrue, frame = capture.read()
     

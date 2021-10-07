@@ -12,7 +12,7 @@ people = ['Ben Afflek', 'Elton John', 'Jerry Seinfield', 'Madonna', 'Mindy Kalin
 face_recognizer = cv.face.LBPHFaceRecognizer_create()
 face_recognizer.read('face_trained.yml')
 
-img = cv.imread(r'../Resources\Faces\val\elton_john/1.jpg')
+img = cv.imread("..\\Resources\\Faces\\val\\elton_john/3.jpg")
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow('Person', gray)
@@ -20,7 +20,7 @@ cv.imshow('Person', gray)
 # Detect the face in the image
 faces_rect = haar_cascade.detectMultiScale(gray, 1.1, 4)
 
-for (x,y,w,h) in faces_rect:
+for (x, y, w, h) in faces_rect:
     faces_roi = gray[y:y+h,x:x+w]
 
     label, confidence = face_recognizer.predict(faces_roi)

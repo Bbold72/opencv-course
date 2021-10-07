@@ -3,17 +3,19 @@
 import cv2 as cv
 import matplotlib.pyplot as plt
 
-img = cv.imread('../Resources/Photos/park.jpg')
+img = cv.imread("..\\Resources\\Photos\\park.jpg")
 cv.imshow('Park', img)
 
-# plt.imshow(img)
-# plt.show()
+# opencv reads images as BGR instead of RBG
+plt.imshow(img)
+plt.show()
 
 # BGR to Grayscale
+#   - grayscale images basically show you the distribution of color intensity
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow('Gray', gray)
 
-# BGR to HSV
+# BGR to HSV - Hue Saturation Value
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 cv.imshow('HSV', hsv)
 
